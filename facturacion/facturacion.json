@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "citaId": 1,
+    "clienteId": 1,
+    "fechaEmision": "2026-06-05",
+    "concepto": "Consulta medicina general",
+    "monto": 75000,
+    "estado": "Pendiente"
+  }
+]

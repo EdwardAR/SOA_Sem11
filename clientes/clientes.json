@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ana",
+    "apellido": "Lopez",
+    "documento": "1001001001",
+    "telefono": "3001234567",
+    "email": "ana.lopez@example.com",
+    "fechaNacimiento": "1995-04-12"
+  },
+  {
+    "id": 2,
+    "nombre": "Carlos",
+    "apellido": "Perez",
+    "documento": "1002002002",
+    "telefono": "3007654321",
+    "email": "carlos.perez@example.com",
+    "fechaNacimiento": "1988-09-22"
+  },
+  {
+    "id": 3,
+    "nombre": "Maria",
+    "apellido": "Gomez",
+    "documento": "1003003003",
+    "telefono": "3011112233",
+    "email": "maria.gomez@example.com",
+    "fechaNacimiento": "2000-01-30"
+  }
+]

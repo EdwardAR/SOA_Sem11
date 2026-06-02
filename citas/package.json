@@ -1,0 +1,14 @@
+{
+  "name": "citas-service",
+  "version": "1.0.0",
+  "description": "Microservicio de citas medicas para sistema de citas medicas",
+  "main": "serverCitas.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node serverCitas.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

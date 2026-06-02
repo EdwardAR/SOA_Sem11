@@ -1,0 +1,14 @@
+{
+  "name": "clientes-service",
+  "version": "1.0.0",
+  "description": "Microservicio de clientes para sistema de citas medicas",
+  "main": "serverClientes.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node serverClientes.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

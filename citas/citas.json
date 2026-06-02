@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "clienteId": 1,
+    "fecha": "2026-06-05",
+    "hora": "09:00",
+    "especialidad": "Medicina General",
+    "medico": "Dra. Ruiz",
+    "motivo": "Control anual",
+    "estado": "Programada"
+  },
+  {
+    "id": 2,
+    "clienteId": 2,
+    "fecha": "2026-06-07",
+    "hora": "11:30",
+    "especialidad": "Pediatria",
+    "medico": "Dr. Sanchez",
+    "motivo": "Revision de rutina",
+    "estado": "Programada"
+  },
+  {
+    "id": 3,
+    "clienteId": 4,
+    "fecha": "2026-06-15",
+    "hora": "10:15",
+    "especialidad": "Prueba",
+    "medico": "Dr. Test",
+    "motivo": "Validacion",
+    "estado": "Cancelada"
+  }
+]

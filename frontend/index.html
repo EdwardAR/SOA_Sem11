@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Gestion de Citas Medicas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero py-5 text-white">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <span class="badge rounded-pill text-bg-light text-dark mb-3">Microservicios con Node.js + Express</span>
+          <h1 class="display-5 fw-bold mb-3">Sistema de Gestion de Citas Medicas</h1>
+          <p class="lead mb-0">Administra clientes, citas y facturacion desde una interfaz web conectada a tres APIs REST independientes.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container my-5">
+    <ul class="nav nav-pills mb-4" id="mainTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="clientes-tab" data-bs-toggle="pill" data-bs-target="#clientes-panel" type="button" role="tab">Clientes</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="citas-tab" data-bs-toggle="pill" data-bs-target="#citas-panel" type="button" role="tab">Citas</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="facturacion-tab" data-bs-toggle="pill" data-bs-target="#facturacion-panel" type="button" role="tab">Facturacion</button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <section class="tab-pane fade show active" id="clientes-panel" role="tabpanel">
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body">
+            <h2 class="h4 mb-3">Registrar o editar cliente</h2>
+            <form id="clienteForm" class="row g-3">
+              <input type="hidden" id="clienteId" />
+              <div class="col-md-6"><input class="form-control" id="clienteNombre" placeholder="Nombre" required /></div>
+              <div class="col-md-6"><input class="form-control" id="clienteApellido" placeholder="Apellido" required /></div>
+              <div class="col-md-4"><input class="form-control" id="clienteDocumento" placeholder="Documento" required /></div>
+              <div class="col-md-4"><input class="form-control" id="clienteTelefono" placeholder="Telefono" required /></div>
+              <div class="col-md-4"><input class="form-control" id="clienteFechaNacimiento" type="date" required /></div>
+              <div class="col-md-8"><input class="form-control" id="clienteEmail" type="email" placeholder="Correo electronico" required /></div>
+              <div class="col-md-4 d-flex gap-2">
+                <button class="btn btn-primary flex-grow-1" type="submit">Guardar cliente</button>
+                <button class="btn btn-outline-secondary" type="button" id="limpiarCliente">Limpiar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="table-card card shadow-sm border-0">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h3 class="h5 mb-0">Listado de clientes</h3>
+              <button class="btn btn-sm btn-outline-primary" id="recargarClientes">Recargar</button>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-middle">
+                <thead>
+                  <tr>
+                    <th>ID</th><th>Nombre</th><th>Documento</th><th>Telefono</th><th>Email</th><th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="clientesTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-pane fade" id="citas-panel" role="tabpanel">
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body">
+            <h2 class="h4 mb-3">Registrar o editar cita</h2>
+            <form id="citaForm" class="row g-3">
+              <input type="hidden" id="citaId" />
+              <div class="col-md-4">
+                <label class="form-label">Cliente</label>
+                <select class="form-select" id="citaClienteId" required></select>
+              </div>
+              <div class="col-md-4"><label class="form-label">Fecha</label><input class="form-control" id="citaFecha" type="date" required /></div>
+              <div class="col-md-4"><label class="form-label">Hora</label><input class="form-control" id="citaHora" type="time" required /></div>
+              <div class="col-md-4"><input class="form-control" id="citaEspecialidad" placeholder="Especialidad" required /></div>
+              <div class="col-md-4"><input class="form-control" id="citaMedico" placeholder="Medico" required /></div>
+              <div class="col-md-4"><input class="form-control" id="citaMotivo" placeholder="Motivo" required /></div>
+              <div class="col-md-4 d-flex gap-2">
+                <button class="btn btn-primary flex-grow-1" type="submit">Guardar cita</button>
+                <button class="btn btn-outline-secondary" type="button" id="limpiarCita">Limpiar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="table-card card shadow-sm border-0">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h3 class="h5 mb-0">Listado de citas</h3>
+              <button class="btn btn-sm btn-outline-primary" id="recargarCitas">Recargar</button>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-middle">
+                <thead>
+                  <tr>
+                    <th>ID</th><th>Cliente</th><th>Fecha</th><th>Hora</th><th>Especialidad</th><th>Estado</th><th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="citasTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-pane fade" id="facturacion-panel" role="tabpanel">
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body">
+            <h2 class="h4 mb-3">Registrar o editar factura</h2>
+            <form id="facturaForm" class="row g-3">
+              <input type="hidden" id="facturaId" />
+              <div class="col-md-4">
+                <label class="form-label">Cita</label>
+                <select class="form-select" id="facturaCitaId" required></select>
+              </div>
+              <div class="col-md-4"><label class="form-label">Fecha de emision</label><input class="form-control" id="facturaFechaEmision" type="date" required /></div>
+              <div class="col-md-4"><label class="form-label">Monto</label><input class="form-control" id="facturaMonto" type="number" min="0" step="1" required /></div>
+              <div class="col-md-6"><input class="form-control" id="facturaConcepto" placeholder="Concepto" required /></div>
+              <div class="col-md-3">
+                <select class="form-select" id="facturaEstado">
+                  <option value="Pendiente">Pendiente</option>
+                  <option value="Pagada">Pagada</option>
+                  <option value="Anulada">Anulada</option>
+                </select>
+              </div>
+              <div class="col-md-3 d-flex gap-2">
+                <button class="btn btn-primary flex-grow-1" type="submit">Guardar factura</button>
+                <button class="btn btn-outline-secondary" type="button" id="limpiarFactura">Limpiar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="table-card card shadow-sm border-0">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h3 class="h5 mb-0">Listado de facturas</h3>
+              <button class="btn btn-sm btn-outline-primary" id="recargarFacturas">Recargar</button>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-middle">
+                <thead>
+                  <tr>
+                    <th>ID</th><th>Cita</th><th>Cliente</th><th>Fecha</th><th>Monto</th><th>Estado</th><th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="facturasTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="alertContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

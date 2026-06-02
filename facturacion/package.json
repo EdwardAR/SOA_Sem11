@@ -1,0 +1,14 @@
+{
+  "name": "facturacion-service",
+  "version": "1.0.0",
+  "description": "Microservicio de facturacion para sistema de citas medicas",
+  "main": "serverFacturacion.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node serverFacturacion.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
