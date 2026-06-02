@@ -28,5 +28,25 @@
     "medico": "Dr. Test",
     "motivo": "Validacion",
     "estado": "Cancelada"
+  },
+  {
+    "id": 4,
+    "clienteId": 4,
+    "fecha": "2026-06-02",
+    "hora": "08:11",
+    "especialidad": "Dermatologia",
+    "medico": "Medico",
+    "motivo": "Granitos",
+    "estado": "Cancelada"
+  },
+  {
+    "id": 5,
+    "clienteId": 4,
+    "fecha": "2026-06-09",
+    "hora": "11:11",
+    "especialidad": "Oftalmologia",
+    "medico": "Dra. Ruiz",
+    "motivo": "Revision de rutina",
+    "estado": "Programada"
   }
 ]

@@ -25,5 +25,14 @@
     "telefono": "3011112233",
     "email": "maria.gomez@example.com",
     "fechaNacimiento": "2000-01-30"
+  },
+  {
+    "id": 4,
+    "nombre": "Laura",
+    "apellido": "Martinez",
+    "documento": "32063064",
+    "telefono": "3001066923",
+    "email": "laura.martinez@yahoo.com",
+    "fechaNacimiento": "1982-06-12"
   }
 ]

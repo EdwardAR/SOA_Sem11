@@ -4,6 +4,7 @@
 
 - `frontend/`: interfaz web con Bootstrap 5 y JavaScript puro.
 - `clientes/`: microservicio de clientes en el puerto 3000.
+![alt text](Capturas/image.png)
 - `citas/`: microservicio de citas en el puerto 3001.
 - `facturacion/`: microservicio de facturacion en el puerto 3002.
 

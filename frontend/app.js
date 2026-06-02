@@ -148,7 +148,7 @@ function renderCitas() {
       <td><span class="badge text-bg-${cita.estado === 'Cancelada' ? 'secondary' : 'success'}">${cita.estado}</span></td>
       <td>
         <button class="btn btn-sm btn-outline-primary me-2" data-action="editar-cita" data-id="${cita.id}">Editar</button>
-        <button class="btn btn-sm btn-outline-warning" data-action="cancelar-cita" data-id="${cita.id}">Cancelar</button>
+        <button class="btn btn-sm btn-outline-danger" data-action="cancelar-cita" data-id="${cita.id}">Eliminar</button>
       </td>
     </tr>
   `).join('') || '<tr><td colspan="7" class="text-center text-muted py-4">Sin citas registradas</td></tr>';
@@ -163,7 +163,7 @@ function renderFacturas() {
         <td>${factura.citaId}</td>
         <td>${factura.clienteId ? nombreCliente(factura.clienteId) : (cita ? nombreCliente(cita.clienteId) : 'Sin cliente')}</td>
         <td>${factura.fechaEmision}</td>
-        <td>$${Number(factura.monto).toLocaleString('es-CO')}</td>
+        <td>S/ ${Number(factura.monto).toLocaleString('es-PE')}</td>
         <td><span class="badge text-bg-${factura.estado === 'Pagada' ? 'success' : factura.estado === 'Anulada' ? 'secondary' : 'warning'}">${factura.estado}</span></td>
         <td>
           <button class="btn btn-sm btn-outline-primary me-2" data-action="editar-factura" data-id="${factura.id}">Editar</button>
@@ -305,6 +305,81 @@ function prepararEdicionFactura(factura) {
   elementos.facturaEstado.value = factura.estado;
 }
 
+function generarClienteAleatorio() {
+  const nombres = ['Juan', 'Maria', 'Carlos', 'Ana', 'Luis', 'Sofia', 'Diego', 'Laura', 'Miguel', 'Isabel'];
+  const apellidos = ['Gomez', 'Lopez', 'Martinez', 'Rodriguez', 'Perez', 'Garcia', 'Sanchez', 'Diaz', 'Ramirez', 'Flores'];
+  const dominios = ['gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com'];
+  
+  const nombre = nombres[Math.floor(Math.random() * nombres.length)];
+  const apellido = apellidos[Math.floor(Math.random() * apellidos.length)];
+  const documento = String(Math.floor(Math.random() * 99999999) + 1000000).padStart(8, '0');
+  const telefono = String(Math.floor(Math.random() * 9000000) + 1000000).padStart(7, '0');
+  const email = `${nombre.toLowerCase()}.${apellido.toLowerCase()}@${dominios[Math.floor(Math.random() * dominios.length)]}`;
+  const anio = Math.floor(Math.random() * 50) + 1960;
+  const mes = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+  const dia = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');
+  const fechaNacimiento = `${anio}-${mes}-${dia}`;
+  
+  elementos.clienteNombre.value = nombre;
+  elementos.clienteApellido.value = apellido;
+  elementos.clienteDocumento.value = documento;
+  elementos.clienteTelefono.value = '300' + telefono;
+  elementos.clienteEmail.value = email;
+  elementos.clienteFechaNacimiento.value = fechaNacimiento;
+}
+
+function generarCitaAleatoria() {
+  if (estado.clientes.length === 0) {
+    mostrarMensaje('Registra al menos un cliente primero', 'warning');
+    return;
+  }
+  
+  const especialidades = ['Medicina General', 'Pediatria', 'Cardiologia', 'Dermatologia', 'Oftalmologia', 'Neurologia', 'Psicologia'];
+  const medicos = ['Dra. Ruiz', 'Dr. Sanchez', 'Dra. Martinez', 'Dr. Lopez', 'Dra. Garcia', 'Dr. Perez', 'Dra. Rodriguez'];
+  const motivos = ['Control general', 'Revision de rutina', 'Seguimiento', 'Consulta especializada', 'Chequeo anual', 'Evaluacion'];
+  
+  const clienteAleatorio = estado.clientes[Math.floor(Math.random() * estado.clientes.length)];
+  const hoy = new Date();
+  const fecha = new Date(hoy.getTime() + Math.random() * 30 * 24 * 60 * 60 * 1000);
+  const fechaFormato = fecha.toISOString().split('T')[0];
+  const horaMin = Math.floor(Math.random() * 24);
+  const minMin = Math.floor(Math.random() * 60);
+  const horaFormato = String(horaMin).padStart(2, '0') + ':' + String(minMin).padStart(2, '0');
+  
+  elementos.citaClienteId.value = clienteAleatorio.id;
+  elementos.citaFecha.value = fechaFormato;
+  elementos.citaHora.value = horaFormato;
+  elementos.citaEspecialidad.value = especialidades[Math.floor(Math.random() * especialidades.length)];
+  elementos.citaMedico.value = medicos[Math.floor(Math.random() * medicos.length)];
+  elementos.citaMotivo.value = motivos[Math.floor(Math.random() * motivos.length)];
+}
+
+function generarFacturaAleatoria() {
+  if (estado.citas.length === 0) {
+    mostrarMensaje('Registra al menos una cita primero', 'warning');
+    return;
+  }
+  
+  const conceptos = ['Consulta medica', 'Analisis clinico', 'Revision especializada', 'Procedimiento medico', 'Atencion urgencia', 'Terapia'];
+  const citasDisponibles = estado.citas.filter((c) => c.estado !== 'Cancelada');
+  
+  if (citasDisponibles.length === 0) {
+    mostrarMensaje('No hay citas disponibles', 'warning');
+    return;
+  }
+  
+  const citaAleatoria = citasDisponibles[Math.floor(Math.random() * citasDisponibles.length)];
+  const monto = (Math.random() * 400 + 50).toFixed(2);
+  const hoy = new Date();
+  const fechaFormato = hoy.toISOString().split('T')[0];
+  
+  elementos.facturaCitaId.value = citaAleatoria.id;
+  elementos.facturaFechaEmision.value = fechaFormato;
+  elementos.facturaConcepto.value = conceptos[Math.floor(Math.random() * conceptos.length)];
+  elementos.facturaMonto.value = monto;
+  elementos.facturaEstado.value = 'Pendiente';
+}
+
 async function manejarAccionesTabla(evento) {
   const boton = evento.target.closest('button[data-action]');
   if (!boton) return;
@@ -358,6 +433,9 @@ async function manejarAccionesTabla(evento) {
 document.getElementById('limpiarCliente').addEventListener('click', limpiarFormularioCliente);
 document.getElementById('limpiarCita').addEventListener('click', limpiarFormularioCita);
 document.getElementById('limpiarFactura').addEventListener('click', limpiarFormularioFactura);
+document.getElementById('generarCliente').addEventListener('click', generarClienteAleatorio);
+document.getElementById('generarCita').addEventListener('click', generarCitaAleatoria);
+document.getElementById('generarFactura').addEventListener('click', generarFacturaAleatoria);
 document.getElementById('recargarClientes').addEventListener('click', cargarClientes);
 document.getElementById('recargarCitas').addEventListener('click', cargarCitas);
 document.getElementById('recargarFacturas').addEventListener('click', cargarFacturas);

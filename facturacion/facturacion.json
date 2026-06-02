@@ -5,7 +5,16 @@
     "clienteId": 1,
     "fechaEmision": "2026-06-05",
     "concepto": "Consulta medicina general",
-    "monto": 75000,
+    "monto": 75,
+    "estado": "Pendiente"
+  },
+  {
+    "id": 2,
+    "citaId": 5,
+    "clienteId": 4,
+    "fechaEmision": "2026-06-02",
+    "concepto": "Atencion urgencia",
+    "monto": 353.85,
     "estado": "Pendiente"
   }
 ]

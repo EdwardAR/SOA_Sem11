@@ -14,7 +14,7 @@
         <div class="col-lg-8">
           <span class="badge rounded-pill text-bg-light text-dark mb-3">Microservicios con Node.js + Express</span>
           <h1 class="display-5 fw-bold mb-3">Sistema de Gestion de Citas Medicas</h1>
-          <p class="lead mb-0">Administra clientes, citas y facturacion desde una interfaz web conectada a tres APIs REST independientes.</p>
+          <p class="lead mb-0">Administra clientes, citas y facturacion desde una interfaz web conectada a tres APIs REST independientes. Elaborado por Edward Antonio</p>
         </div>
       </div>
     </div>
@@ -46,8 +46,9 @@
               <div class="col-md-4"><input class="form-control" id="clienteTelefono" placeholder="Telefono" required /></div>
               <div class="col-md-4"><input class="form-control" id="clienteFechaNacimiento" type="date" required /></div>
               <div class="col-md-8"><input class="form-control" id="clienteEmail" type="email" placeholder="Correo electronico" required /></div>
-              <div class="col-md-4 d-flex gap-2">
+              <div class="col-md-12 d-flex gap-2">
                 <button class="btn btn-primary flex-grow-1" type="submit">Guardar cliente</button>
+                <button class="btn btn-success" type="button" id="generarCliente">Generar aleatorio</button>
                 <button class="btn btn-outline-secondary" type="button" id="limpiarCliente">Limpiar</button>
               </div>
             </form>
@@ -89,8 +90,9 @@
               <div class="col-md-4"><input class="form-control" id="citaEspecialidad" placeholder="Especialidad" required /></div>
               <div class="col-md-4"><input class="form-control" id="citaMedico" placeholder="Medico" required /></div>
               <div class="col-md-4"><input class="form-control" id="citaMotivo" placeholder="Motivo" required /></div>
-              <div class="col-md-4 d-flex gap-2">
+              <div class="col-md-12 d-flex gap-2">
                 <button class="btn btn-primary flex-grow-1" type="submit">Guardar cita</button>
+                <button class="btn btn-success" type="button" id="generarCita">Generar aleatorio</button>
                 <button class="btn btn-outline-secondary" type="button" id="limpiarCita">Limpiar</button>
               </div>
             </form>
@@ -128,7 +130,7 @@
                 <select class="form-select" id="facturaCitaId" required></select>
               </div>
               <div class="col-md-4"><label class="form-label">Fecha de emision</label><input class="form-control" id="facturaFechaEmision" type="date" required /></div>
-              <div class="col-md-4"><label class="form-label">Monto</label><input class="form-control" id="facturaMonto" type="number" min="0" step="1" required /></div>
+              <div class="col-md-3"><label class="form-label">Monto (S/)</label><input class="form-control" id="facturaMonto" type="number" min="0" step="0.01" required /></div>
               <div class="col-md-6"><input class="form-control" id="facturaConcepto" placeholder="Concepto" required /></div>
               <div class="col-md-3">
                 <select class="form-select" id="facturaEstado">
@@ -137,8 +139,9 @@
                   <option value="Anulada">Anulada</option>
                 </select>
               </div>
-              <div class="col-md-3 d-flex gap-2">
+              <div class="col-md-6 d-flex gap-2">
                 <button class="btn btn-primary flex-grow-1" type="submit">Guardar factura</button>
+                <button class="btn btn-success" type="button" id="generarFactura">Generar aleatorio</button>
                 <button class="btn btn-outline-secondary" type="button" id="limpiarFactura">Limpiar</button>
               </div>
             </form>
