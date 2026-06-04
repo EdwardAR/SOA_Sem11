@@ -137,15 +137,13 @@ app.delete('/citas/:id', async (req, res) => {
       return res.status(404).json({ mensaje: 'Cita no encontrada.' });
     }
 
-    citas[indice] = {
-      ...citas[indice],
-      estado: 'Cancelada'
-    };
+    const citaEliminada = citas[indice];
+    citas.splice(indice, 1);
 
     await guardarCitas(citas);
-    res.json({ mensaje: 'Cita cancelada correctamente.', cita: citas[indice] });
+    res.json({ mensaje: 'Cita eliminada correctamente.', cita: citaEliminada });
   } catch (error) {
-    res.status(500).json({ mensaje: 'No fue posible cancelar la cita.', error: error.message });
+    res.status(500).json({ mensaje: 'No fue posible eliminar la cita.', error: error.message });
   }
 });
 

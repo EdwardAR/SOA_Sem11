@@ -409,7 +409,7 @@ async function manejarAccionesTabla(evento) {
     if (accion === 'cancelar-cita') {
       if (confirm('¿Deseas cancelar esta cita?')) {
         await requestJSON(`${URL_CITAS}/citas/${id}`, { method: 'DELETE' });
-        mostrarMensaje('Cita cancelada correctamente', 'warning');
+        mostrarMensaje('Cita eliminada correctamente', 'warning');
         await cargarCitas();
       }
     }
